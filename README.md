@@ -20,3 +20,21 @@ You can use this pom as a parent for data deployment projects:
 
 The available versions are listed [here](https://maven.aksw.org/archiva/#artifact/org.aksw.data.config/aksw-data-deployment).
 
+
+## Creating a release
+
+For internal use. Deploys this pom to maven central. Requires the AKSW gpg key.
+
+In order to create a github release, on `develop` branch run
+
+```
+git checkout develop
+mvn gitflow:release-start gitflow:release-finish
+```
+
+If this succeeds, switch to the `main` branch and run
+
+```
+git checkout main
+mvn -Prelease deploy
+```
