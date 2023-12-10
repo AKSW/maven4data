@@ -9,8 +9,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-    <name>AKSW Data Deployment Configuration</name>
-    <description>An Apache Maven pom.xml file with common settings for deploying data artifacts to the AKSW infrastructure.</description>
+	<name>AKSW Data Deployment Configuration</name>
+	<description>An Apache Maven pom.xml file with common settings for deploying
+		data artifacts to the AKSW infrastructure.</description>
 
 	<organization>
 		<name>Agile Knowledge Engineering and Semantic Web (AKSW) Research Group</name>
@@ -32,7 +33,8 @@
 	<scm>
 		<url>https://github.com/AKSW/aksw-data-deployment</url>
 		<connection>scm:git:git://github.com/AKSW/aksw-data-deploymentk.git</connection>
-		<developerConnection>scm:git:git@github.com:AKSW/aksw-data-deployment.git</developerConnection>
+		<developerConnection>
+			scm:git:git@github.com:AKSW/aksw-data-deployment.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
