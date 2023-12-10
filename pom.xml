@@ -69,10 +69,13 @@
 		<maven-javadoc-plugin>3.6.1</maven-javadoc-plugin>
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
 		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+		<maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
+
+		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+		<nexus-staging-plugin.version>>1.6.13</nexus-staging-plugin.version>
 
 		<!-- Project Settings -->
 		<maven.compiler.release>17</maven.compiler.release>
-		<java.version.javadoc>http://java.sun.com/javase/8/docs/api/</java.version.javadoc>
 		<file.encoding>UTF-8</file.encoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -87,6 +90,13 @@
 	</dependencyManagement>
 
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.amashchenko.maven.plugin</groupId>
+				<artifactId>gitflow-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -100,6 +110,7 @@
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>${build-helper-maven-plugin.version}</version>
 				</plugin>
+
 				<plugin>
 					<groupId>com.amashchenko.maven.plugin</groupId>
 					<artifactId>gitflow-maven-plugin</artifactId>
@@ -118,6 +129,12 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
 					<version>${maven-install-plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
 				</plugin>
 
 				<plugin>
@@ -147,7 +164,6 @@
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
-
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -236,7 +252,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-gpg-plugin</artifactId>
-					<version>1.6</version>
+					<version>${maven-gpg-plugin.version}</version>
 					<executions>
 						<execution>
 							<id>sign-artifacts</id>
@@ -255,7 +271,7 @@
 				<plugin>
 					<groupId>org.sonatype.plugins</groupId>
 					<artifactId>nexus-staging-maven-plugin</artifactId>
-					<version>1.6.8</version>
+					<version>${nexus-staging-maven-plugin.version}</version>
 					<extensions>true</extensions>
 					<configuration>
 						<serverId>ossrh</serverId>
