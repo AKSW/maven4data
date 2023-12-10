@@ -215,7 +215,7 @@
 						</execution>
 					</executions>
 					<configuration>
-						<additionalparam>-Xdoclint:none</additionalparam>
+						<doclint>none</doclint>
 					</configuration>
 				</plugin>
 
@@ -293,22 +293,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>${maven-dependency-plugin.version}</version>
-					<executions>
-						<execution>
-							<phase>prepare-package</phase>
-							<!-- <phase>package</phase> -->
-							<goals>
-								<goal>copy-dependencies</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<!-- <useBaseVersion>false</useBaseVersion> -->
-						<overWriteReleases>false</overWriteReleases>
-						<overWriteSnapshots>true</overWriteSnapshots>
-						<includeScope>runtime</includeScope>
-						<outputDirectory>${project.build.directory}/lib</outputDirectory>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -320,7 +304,6 @@
 			<name>University Leipzig, AKSW Maven2 Internal Repository</name>
 			<url>https://maven.aksw.org/repository/internal/</url>
 		</repository>
-
 		<repository>
 			<id>maven.aksw.snapshots</id>
 			<name>University Leipzig, AKSW Maven2 Snapshot Repository</name>
@@ -329,17 +312,17 @@
 	</repositories>
 
 	<distributionManagement>
+		<!--
 		<repository>
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
-		<!--
+		-->
 		<repository>
 			<id>maven.aksw.internal</id>
 			<name>University Leipzig, AKSW Maven2 Internal Repository</name>
 			<url>https://maven.aksw.org/repository/internal/</url>
 		</repository>
-		-->
 		<snapshotRepository>
 			<id>maven.aksw.snapshots</id>
 			<name>AKSW Snapshot Repository</name>
@@ -356,7 +339,6 @@
 					<value>true</value>
 				</property>
 			</activation>
-
 			<build>
 				<plugins>
 					<plugin>
