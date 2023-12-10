@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.aksw.data.config</groupId>
+	<artifactId>aksw-data-deployment</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<organization>
+		<name>Agile Knowledge Engineering and Semantic Web (AKSW) Research Group</name>
+		<url>https://aksw.org</url>
+	</organization>
+
+	<inceptionYear>2023</inceptionYear>
+
+	<url>https://github.com/AKSW/aksw-data-deployment</url>
+
+	<licenses>
+		<license>
+			<name>Apache License 2.0</name>
+			<url>https://www.apache.org/licenses/</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/AKSW/aksw-data-deployment</url>
+		<connection>scm:git:git://github.com/AKSW/aksw-data-deploymentk.git</connection>
+		<developerConnection>scm:git:git@github.com:AKSW/aksw-data-deployment.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>Claus Stadler</name>
+			<url>http://aksw.org/ClausStadler</url>
+			<organization>AKSW</organization>
+			<organizationUrl>http://aksw.org</organizationUrl>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<url>https://github.com/AKSW/aksw-data-deployment/issues</url>
+		<system>GitHub</system>
+	</issueManagement>
+
+	<properties>
+		<download-maven-plugin.version>1.7.1</download-maven-plugin.version>
+		<build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
+
+		<gitflow-maven-plugin.version>1.13.0</gitflow-maven-plugin.version>
+
+		<maven-install-plugin.version>3.1.1</maven-install-plugin.version>
+		<maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
+		<maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+		<maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
+
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+		<maven-shade-plugin.version>3.5.1</maven-shade-plugin.version>
+		<maven-javadoc-plugin>3.6.1</maven-javadoc-plugin>
+
+		<!-- Project Settings -->
+		<maven.compiler.release>17</maven.compiler.release>
+		<java.version.javadoc>http://java.sun.com/javase/8/docs/api/</java.version.javadoc>
+		<file.encoding>UTF-8</file.encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<gpg.keyname>AKSW</gpg.keyname>
+	</properties>
+
+
+	<dependencyManagement>
+		<dependencies>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.googlecode.maven-download-plugin</groupId>
+					<artifactId>download-maven-plugin</artifactId>
+					<version>${download-maven-plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${build-helper-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>com.amashchenko.maven.plugin</groupId>
+					<artifactId>gitflow-maven-plugin</artifactId>
+					<version>${gitflow-maven-plugin.version}</version>
+					<configuration>
+						<installProject>false</installProject>
+						<pushRemote>false</pushRemote>
+						<gitFlowConfig>
+							<versionTagPrefix>v</versionTagPrefix>
+						</gitFlowConfig>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${maven-install-plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${maven-clean-plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<release>${maven.compiler.release}</release>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven-source-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven-javadoc-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>attach-javadocs</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+							<configuration>
+								<failOnError>false</failOnError>
+							</configuration>
+						</execution>
+					</executions>
+					<configuration>
+						<additionalparam>-Xdoclint:none</additionalparam>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.19</version>
+					<configuration>
+						<!-- <forkCount>1C</forkCount> -->
+						<!-- <reuseForks>true</reuseForks> -->
+						<useSystemClassLoader>false</useSystemClassLoader>
+						<!-- <forkCount>1</forkCount>
+						<reuseForks>false</reuseForks> -->
+						<argLine>-Xms256m -Xmx512m</argLine>
+						<testFailureIgnore>false</testFailureIgnore>
+						<skipTests>false</skipTests>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>${maven-shade-plugin.version}</version>
+					<executions>
+						<!-- Run shade goal on package phase -->
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>shade</goal>
+							</goals>
+							<configuration>
+								<shadedArtifactAttached>true</shadedArtifactAttached>
+								<shadedClassifierName>jar-with-dependencies</shadedClassifierName>
+								<filters>
+									<filter>
+										<artifact>*:*</artifact>
+										<excludes>
+											<exclude>META-INF/*.SF</exclude>
+											<exclude>META-INF/*.DSA</exclude>
+											<exclude>META-INF/*.RSA</exclude>
+										</excludes>
+									</filter>
+								</filters>
+								<transformers>
+									<transformer
+										implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+								</transformers>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.6</version>
+					<executions>
+						<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+							<configuration>
+								<keyname>AKSW</keyname>
+								<passphraseServerId>${gpg.keyname}</passphraseServerId>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>1.6.8</version>
+					<extensions>true</extensions>
+					<configuration>
+						<serverId>ossrh</serverId>
+						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+						<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven-deploy-plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven-dependency-plugin.version}</version>
+					<executions>
+						<execution>
+							<phase>prepare-package</phase>
+							<!-- <phase>package</phase> -->
+							<goals>
+								<goal>copy-dependencies</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<!-- <useBaseVersion>false</useBaseVersion> -->
+						<overWriteReleases>false</overWriteReleases>
+						<overWriteSnapshots>true</overWriteSnapshots>
+						<includeScope>runtime</includeScope>
+						<outputDirectory>${project.build.directory}/lib</outputDirectory>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>maven.aksw.internal</id>
+			<name>University Leipzig, AKSW Maven2 Internal Repository</name>
+			<url>https://maven.aksw.org/repository/internal/</url>
+		</repository>
+
+		<repository>
+			<id>maven.aksw.snapshots</id>
+			<name>University Leipzig, AKSW Maven2 Snapshot Repository</name>
+			<url>https://maven.aksw.org/repository/snapshots/</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>maven.aksw.internal</id>
+			<name>University Leipzig, AKSW Maven2 Internal Repository</name>
+			<url>https://maven.aksw.org/repository/internal/</url>
+		</repository>
+		<snapshotRepository>
+			<id>maven.aksw.snapshots</id>
+			<name>AKSW Snapshot Repository</name>
+			<url>https://maven.aksw.org/repository/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+					</plugin>
+
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
