@@ -6,7 +6,7 @@
 
 	<groupId>org.aksw.data.config</groupId>
 	<artifactId>aksw-data-deployment</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>AKSW Data Deployment Configuration</name>
@@ -66,7 +66,7 @@
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
 		<maven-shade-plugin.version>3.5.1</maven-shade-plugin.version>
-		<maven-javadoc-plugin>3.6.1</maven-javadoc-plugin>
+		<maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
 		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
 		<maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
