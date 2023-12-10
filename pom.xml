@@ -56,7 +56,7 @@
 		<download-maven-plugin.version>1.7.1</download-maven-plugin.version>
 		<build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
 
-		<gitflow-maven-plugin.version>1.13.0</gitflow-maven-plugin.version>
+		<gitflow-maven-plugin.version>1.20.0</gitflow-maven-plugin.version>
 
 		<maven-install-plugin.version>3.1.1</maven-install-plugin.version>
 		<maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
@@ -108,6 +108,7 @@
 						<installProject>false</installProject>
 						<pushRemote>false</pushRemote>
 						<gitFlowConfig>
+							<productionBranch>main</productionBranch>
 							<versionTagPrefix>v</versionTagPrefix>
 						</gitFlowConfig>
 					</configuration>
