@@ -71,7 +71,9 @@
 		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
 		<maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
 		<maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+		
 		<properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
+		<iad-json-properties-maven-plugin.version>1.1</iad-json-properties-maven-plugin.version>
 
 		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
 		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
@@ -301,6 +303,11 @@
 					<version>${properties-maven-plugin.version}</version>
 				</plugin>
 
+				<plugin>
+					<groupId>com.github.iarellano</groupId>
+					<artifactId>iad-json-properties-maven-plugin</artifactId>
+					<version>${iad-json-properties-maven-plugin.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>

@@ -38,3 +38,11 @@ If this succeeds, switch to the `main` branch and run
 git checkout main
 mvn -Prelease deploy
 ```
+
+
+### Help
+
+Display properties of a `pom.xml` after loading `.properties` and `.json` files:
+```
+mvn initialize help:evaluate -Dexpression=project.properties -q -DforceStdout
+```
