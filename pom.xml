@@ -6,7 +6,7 @@
 
 	<groupId>org.aksw.data.config</groupId>
 	<artifactId>aksw-data-deployment</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<packaging>pom</packaging>
 
 	<name>AKSW Data Deployment Configuration</name>
@@ -238,8 +238,7 @@
 									</filter>
 								</filters>
 								<transformers>
-									<transformer
-										implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+									<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 								</transformers>
 							</configuration>
 						</execution>
@@ -314,16 +313,10 @@
 
 	<distributionManagement>
 		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-		<!--
-		<repository>
 			<id>maven.aksw.internal</id>
-			<name>University Leipzig, AKSW Maven2 Internal Repository</name>
+			<name>AKSW Release Repository</name>
 			<url>https://maven.aksw.org/repository/internal/</url>
 		</repository>
-		-->
 		<snapshotRepository>
 			<id>maven.aksw.snapshots</id>
 			<name>AKSW Snapshot Repository</name>
@@ -332,6 +325,7 @@
 	</distributionManagement>
 
 	<profiles>
+		<!-- Profile for releasing artifacts based on this pom.xml -->
 		<profile>
 			<id>release</id>
 			<activation>
@@ -349,6 +343,8 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<!-- Profile for releasing this pom.xml itself -->
 		<profile>
 			<id>parentRelease</id>
 			<build>
@@ -363,6 +359,12 @@
 					</plugin>
 				</plugins>
 			</build>
+			<distributionManagement>
+				<repository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+				</repository>
+			</distributionManagement>
 		</profile>
 	</profiles>
 </project>
