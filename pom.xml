@@ -6,7 +6,7 @@
 
 	<groupId>org.aksw.data.config</groupId>
 	<artifactId>aksw-data-deployment</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.5</version>
 	<packaging>pom</packaging>
 
 	<name>AKSW Data Deployment Configuration</name>
