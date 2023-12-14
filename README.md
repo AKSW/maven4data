@@ -39,6 +39,14 @@ git checkout main
 mvn -Prelease deploy
 ```
 
+### Trouble Shooting
+
+* If you see an error such as the one below then make sure your docker environment is available.
+```
+Execution run-container of goal io.fabric8:docker-maven-plugin:0.43.4:build failed:
+No <dockerHost> given, no DOCKER_HOST environment variable, no read/writable '/var/run/docker.sock'
+or '//./pipe/docker_engine' and no external provider like Docker machine configured
+```
 
 ### Help
 
