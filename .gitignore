@@ -34,3 +34,8 @@ results.tsv
 .vscode
 dependency-reduced-pom.xml
 
+
+# Temporary excludes!
+docs
+examples
+
