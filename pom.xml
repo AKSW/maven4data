@@ -6,7 +6,7 @@
 
 	<groupId>org.aksw.data.config</groupId>
 	<artifactId>aksw-data-deployment</artifactId>
-	<version>0.0.6</version>
+	<version>0.0.7</version>
 	<packaging>pom</packaging>
 
 	<name>AKSW Data Deployment Configuration</name>
@@ -304,6 +304,20 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven.aksw.internal</id>
+			<name>University Leipzig, AKSW Maven2 Internal Repository</name>
+			<url>https://maven.aksw.org/repository/internal/</url>
+		</pluginRepository>
+
+		<pluginRepository>
+			<id>maven.aksw.snapshots</id>
+			<name>University Leipzig, AKSW Maven2 Snapshot Repository</name>
+			<url>https://maven.aksw.org/repository/snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<repositories>
 		<repository>
