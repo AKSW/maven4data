@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent><groupId>org.aksw.data.config</groupId><artifactId>aksw-data-deployment</artifactId><version>0.0.6</version><relativePath></relativePath></parent>
+
+  <groupId>org.aksw.example.data.climatetrace</groupId>
+  <artifactId>climatetrace-fluorinated-gases</artifactId>
+  <version>0.2.0</version>
+  <packaging>pom</packaging>
+  <name>Climate TRACE - Fluorinated Gases</name>
+  <description>Climate TRACE archive for the sector "Fluorinated Gases".</description>
+  <url>https://climatetrace.org</url>
+
+  <licenses>
+    <license>
+      <name>Creative Commons Attribution 4.0</name>
+      <url>https://creativecommons.org/licenses/by/4.0/</url>
+    </license>
+  </licenses>
+
+  <properties>
+    <!-- Machine readable original download link (may eventually break) -->
+    <input.url>https://downloads.climatetrace.org/v02/sector_packages/fluorinated_gases.zip</input.url>
+    <output.filename>fluorinated_gases.zip</output.filename>
+    <output.filetype>zip</output.filetype>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- Downloading from url to file -->
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-dataset</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <url>${input.url}</url>
+          <unpack>false</unpack>
+          <outputDirectory>${project.build.directory}</outputDirectory>
+          <outputFileName>${output.filename}</outputFileName>
+          <skipCache>true</skipCache>
+        </configuration>
+      </plugin>
+
+      <!-- Deployment of file -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-artifacts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${project.build.directory}/${output.filename}</file>
+		  <type>${output.filetype}</type>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
