@@ -305,6 +305,20 @@
 		</pluginManagement>
 	</build>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven.aksw.internal</id>
+			<name>University Leipzig, AKSW Maven2 Internal Repository</name>
+			<url>https://maven.aksw.org/repository/internal/</url>
+		</pluginRepository>
+
+		<pluginRepository>
+			<id>maven.aksw.snapshots</id>
+			<name>University Leipzig, AKSW Maven2 Snapshot Repository</name>
+			<url>https://maven.aksw.org/repository/snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<repositories>
 		<repository>
 			<id>maven.aksw.internal</id>
