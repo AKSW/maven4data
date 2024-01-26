@@ -64,6 +64,8 @@ SELECT * {
 
 ### Querying the actual data of DCAT datasets
 
+The query below uses a SPARQL extension to dowload datasets ad-hoc on the server in order to retrieve the contained geometries.
+
 <img src="docs/images/2024-01-26-yasgui-dataset-instances.png" width="500px"/> |
 
 
