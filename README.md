@@ -21,11 +21,15 @@ You can use this pom as a parent for data deployment projects:
 The available versions are listed [here](https://maven.aksw.org/archiva/#artifact/org.aksw.data.config/aksw-data-deployment).
 
 
-## Examples
+## SPARQL Query Examples
 
 
 ### Query bounding boxes of DCAT datasets
 
+<img src="docs/images/2024-01-26-yasgui-dataset-bboxes.png" width="300px"/> |
+
+<sub>
+  
 ```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX eg: <http://www.example.org/>
@@ -56,9 +60,14 @@ SELECT * {
 }
 ```
 
-<img src="docs/images/2024-01-26-yasgui-dataset-bboxes.png" width="300px"/> |
+</sub>
 
 ### Querying the actual data of DCAT datasets
+
+<img src="docs/images/2024-01-26-yasgui-dataset-instances.png" width="500px"/> |
+
+
+<sub>
 
 ```sparql
 PREFIX eg: <http://www.example.org/>
@@ -100,7 +109,7 @@ SELECT ?dcatMvnUrn ?o ?oColor ?oLabel ?oTooltip ?file {
 }
 ```
 
-<img src="docs/images/2024-01-26-yasgui-dataset-instances.png" width="300px"/> |
+</sub>
 
 
 
