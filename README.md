@@ -22,9 +22,10 @@ The available versions are listed [here](https://maven.aksw.org/archiva/#artifac
 
 
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| ```sparql
+
+### Query bounding boxes of DCAT datasets
+
+```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX eg: <http://www.example.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -52,8 +53,11 @@ SELECT * {
   ), rdf:HTML) AS ?oLabel)
   BIND(?oLabel AS ?oTooltip)
 }
-``` | <img src="docs/images/2024-01-26-yasgui-dataset-bboxes.png" width="300px"/> |
-| ```sparql
+
+<img src="docs/images/2024-01-26-yasgui-dataset-bboxes.png" width="300px"/> |
+
+### Querying the actual data of DCAT datasets
+
 PREFIX eg: <http://www.example.org/>
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX locn: <http://www.w3.org/ns/locn#>
