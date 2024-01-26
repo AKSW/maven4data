@@ -21,6 +21,7 @@ You can use this pom as a parent for data deployment projects:
 The available versions are listed [here](https://maven.aksw.org/archiva/#artifact/org.aksw.data.config/aksw-data-deployment).
 
 
+## Examples
 
 
 ### Query bounding boxes of DCAT datasets
@@ -53,11 +54,13 @@ SELECT * {
   ), rdf:HTML) AS ?oLabel)
   BIND(?oLabel AS ?oTooltip)
 }
+```
 
 <img src="docs/images/2024-01-26-yasgui-dataset-bboxes.png" width="300px"/> |
 
 ### Querying the actual data of DCAT datasets
 
+```sparql
 PREFIX eg: <http://www.example.org/>
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX locn: <http://www.w3.org/ns/locn#>
@@ -95,9 +98,9 @@ SELECT ?dcatMvnUrn ?o ?oColor ?oLabel ?oTooltip ?file {
   ), rdf:HTML) AS ?oLabel)
   BIND(?oLabel AS ?oTooltip)
 }
-``` | <img src="docs/images/2024-01-26-yasgui-dataset-instances.png" width="300px"/> |
+```
 
-
+<img src="docs/images/2024-01-26-yasgui-dataset-instances.png" width="300px"/> |
 
 
 
