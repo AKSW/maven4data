@@ -22,10 +22,9 @@ The available versions are listed [here](https://maven.aksw.org/archiva/#artifac
 
 
 
-<table>
-  <tr>
-    <td>
-
+| First Header  | Second Header |
+| ------------- | ------------- |
+|
 ```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX eg: <http://www.example.org/>
@@ -55,16 +54,10 @@ SELECT * {
   BIND(?oLabel AS ?oTooltip)
 }
 ```
+| <img src="docs/images/2024-01-26-yasgui-dataset-bboxes.png" width="300px"/> |
 
-    </td>
-    <td>
-      <img src="docs/images/2024-01-26-yasgui-dataset-bboxes.png" width="300px"/>
-    </td>
-  </tr>
 
-  <tr>
-    <td>
-
+|
 ```sparql
 PREFIX eg: <http://www.example.org/>
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
@@ -104,13 +97,7 @@ SELECT ?dcatMvnUrn ?o ?oColor ?oLabel ?oTooltip ?file {
   BIND(?oLabel AS ?oTooltip)
 }
 ```
-
-    </td>
-    <td>
-      <img src="docs/images/2024-01-26-yasgui-dataset-instances.png" width="300px"/>
-    </td>
-  </tr>
-</table>
+| <img src="docs/images/2024-01-26-yasgui-dataset-instances.png" width="300px"/> |
 
 
 
