@@ -1,10 +1,10 @@
-title: "Maven-Based Data Management"
+title: "Maven-based Data Management"
 #remote_theme: pmarsceill/just-the-docs
 theme: just-the-docs
 url: https://aksw.github.io/aksw-data-deployment
 
 search_enabled: true
-logo: "assets/images/sansa-logo-blue.png"
+# logo: "assets/images/sansa-logo-blue.png"
 markdown: kramdown
 kramdown:
   parse_block_html: true
