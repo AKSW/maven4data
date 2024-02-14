@@ -22,3 +22,6 @@ jobs:
           working-directory: '${{ github.workspace }}/docs'
       - name: Build with Jekyll
         run: bundle exec jekyll build
+        with:
+          working-directory: '${{ github.workspace }}/docs'
+
