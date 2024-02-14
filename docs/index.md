@@ -1,6 +1,7 @@
-#---
-#nav_order: 10
-#---
+---
+title: Home
+layout: home
+---
 
 ## Maven-based Data Management
 
@@ -10,5 +11,6 @@ Following the guidelines not only makes it possible to publish data under the [F
 (in brief: findability, accessibility, interoperability, and reusability) but also to have **REPRODUCIBLE** builds, which have become conventional in modern software development.
 
 The idea is simple: Maven provides a framework to version, build and deploy (publish) artifacts. Although artifacts are typically JAR files, it is possible to also publish data artifacts.
+
 
 
