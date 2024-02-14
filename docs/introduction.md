@@ -18,6 +18,6 @@ Within a pom.xml you can use any number of Maven plugins to execute code to alte
 
 
 
-<img src="/home/raven/snap/typora/86/.config/Typora/typora-user-images/image-20231216163303266.png" width="900"/>
+<img src="images/maven-lifecycles.png" width="900"/>
 
 Image source: https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22
