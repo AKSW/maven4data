@@ -3,8 +3,8 @@ title: Maven-based Data Management
 theme: just-the-docs
 url: https://aksw.github.io/aksw-data-deployment/
 
-plugins:
-  - jekyll-default-layout
+# plugins:
+#   - jekyll-default-layout
 
 #search_enabled: true
 # logo: "assets/images/sansa-logo-blue.png"
