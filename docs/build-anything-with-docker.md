@@ -1,4 +1,6 @@
 ---
+title: Build Anything with Docker
+layout: default
 nav_order: 50
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Home
 layout: home
+nav_order: 10
 ---
 
 ## Maven-based Data Management

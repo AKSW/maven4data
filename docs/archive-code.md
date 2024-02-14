@@ -1,3 +1,9 @@
+---
+title: Archive Code (Scripts)
+layout: default
+nav_order: 35
+---
+
 ## Archiving Resources (Scripts and Non-Java Code)
 
 Maven can be used bundle any folder up as a JAR archive by declaring that folder as a resource.

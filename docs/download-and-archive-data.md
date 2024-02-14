@@ -1,17 +1,25 @@
 ---
+title: Archive a URL Download
+layout: default
 nav_order: 30
 ---
 
-## Download and Archive a URL
+## Archive a URL Download
 
-A `pom.xml` setup to download a single URL and archive it under an artifact ID is shown below.
-In this pom design, the property `input.url` points to the original URL source. The property can be read out by scripts such as CI processes to auto-generate information.
+### Summary
 
-The approach is:
+This chapter presents a `pom.xml` setup for how to download a single URL and archive it under an artifact ID is shown below.
+
+### Purpose
+
+* Reproducibility: The `pom.xml` can be run repeatedly to create a versioned artifact from the specified URL.
+* Provenance: The property `input.url` points to the original URL source. The property can be read out by scripts such as CI processes to auto-generate information.
+
+
+### Approach
 
 1. Use the `wget` goal of the `download-maven-plugin` to download the URL to a local file.
 2. Attach the artifact to the build with the `build-helper-maven-plugin`.
-
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
