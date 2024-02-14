@@ -36,5 +36,7 @@ dependency-reduced-pom.xml
 
 
 # Temporary excludes!
-examples
+# examples
+
+temp-resources
 
