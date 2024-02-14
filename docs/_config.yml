@@ -1,7 +1,7 @@
 title: Maven-based Data Management
 #remote_theme: pmarsceill/just-the-docs
 theme: just-the-docs
-url: https://aksw.github.io/aksw-data-deployment/
+url: https://aksw.github.io
 
 # plugins:
 #   - jekyll-default-layout
