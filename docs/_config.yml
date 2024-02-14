@@ -1,5 +1,6 @@
 title: "Maven-Based Data Management"
-remote_theme: pmarsceill/just-the-docs
+#remote_theme: pmarsceill/just-the-docs
+theme: just-the-docs
 search_enabled: true
 logo: "assets/images/sansa-logo-blue.png"
 markdown: kramdown

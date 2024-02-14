@@ -13,10 +13,10 @@ In order to package data generation as a self-contained maven build, the two maj
 
 ### Example
 
-The setup at [examples/disasters-rdfizer](examples/disasters-rdfizer) contains the 2 folders
+The setup at [examples/disasters-rdfizer](https://github.com/AKSW/aksw-data-deployment/tree/develop/examples/disasters-rdfizer) contains the 2 folders:
 
-1. `code`
-2. `generator`
+1. `code`: This folder contains the actual data generation script and a `pom.xml` file in order to package and version it.
+2. `generator`: This is a `pom.xml` file that builds and runs a docker container from the `code`.
 
 #### Code
 

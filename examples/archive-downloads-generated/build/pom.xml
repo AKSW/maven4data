@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.coypu.data.climatetrace</groupId>
+  <artifactId>climatetrace-parent</artifactId>
+  <version>0.2.0</version>
+  <packaging>pom</packaging>
+  
+  <parent><groupId>org.aksw.data.config</groupId><artifactId>aksw-data-deployment</artifactId><version>0.0.3</version><relativePath></relativePath></parent>
+
+  <modules>
+    
+      <module>climatetrace-fluorinated-gases</module>
+    
+      <module>climatetrace-agriculture</module>
+    
+      <module>climatetrace-buildings</module>
+    
+      <module>climatetrace-fossil-fuel-operations</module>
+    
+      <module>climatetrace-forestry-and-land-use</module>
+    
+      <module>climatetrace-manufacturing</module>
+    
+      <module>climatetrace-mineral-extraction</module>
+    
+      <module>climatetrace-power</module>
+    
+      <module>climatetrace-transportation</module>
+    
+      <module>climatetrace-waste</module>
+    
+  </modules>
+  <build>
+    <plugins>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <configuration>
+                <skip>true</skip>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <configuration>
+                <skip>true</skip>
+          </configuration>
+        </plugin>
+    </plugins>
+  </build>
+</project>

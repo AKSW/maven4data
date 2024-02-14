@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.coypu.data.climatetrace</groupId>
+	<artifactId>climatetrace-consumer</artifactId>
+	<version>0.2.0</version>
+
+	<parent><groupId>org.aksw.data.config</groupId><artifactId>aksw-data-deployment</artifactId><version>0.0.3</version><relativePath></relativePath></parent>
+
+	<packaging>pom</packaging>
+
+	<properties>
+		<datasetDirectory>${project.build.directory}/datasets</datasetDirectory>
+	</properties>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>${project.build.directory}/datasets</directory>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>resource-dependencies</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<stripVersion>true</stripVersion>
+							<artifactItems>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-fluorinated-gases</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-agriculture</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-buildings</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-fossil-fuel-operations</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-forestry-and-land-use</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-manufacturing</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-mineral-extraction</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-power</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-transportation</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.coypu.data.climatetrace</groupId>
+									<artifactId>climatetrace-waste</artifactId>
+									<version>0.2.0</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${datasetDirectory}</outputDirectory>
+								</artifactItem>
+								
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

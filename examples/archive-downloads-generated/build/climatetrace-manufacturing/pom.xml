@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent><groupId>org.aksw.data.config</groupId><artifactId>aksw-data-deployment</artifactId><version>0.0.3</version><relativePath></relativePath></parent>
+
+  <groupId>org.coypu.data.climatetrace</groupId>
+  <artifactId>climatetrace-manufacturing</artifactId>
+  <version>0.2.0</version>
+  <packaging>pom</packaging>
+  <name>Climate TRACE - Manufacturing</name>
+  <description>Climate TRACE archive for the sector "Manufacturing".</description>
+  <url>https://climatetrace.org</url>
+
+  <licenses>
+    
+    <license>
+      <name>Creative Commons Attribution 4.0</name>
+      <url>https://creativecommons.org/licenses/by/4.0/</url>
+    </license>
+    
+  </licenses>
+
+  <properties>
+    <!-- Machine readable original download link (may eventually break) -->
+    <input.url>https://downloads.climatetrace.org/v02/sector_packages/manufacturing.zip</input.url>
+    <output.filename>manufacturing.zip</output.filename>
+    <output.filetype>zip</output.filetype>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- Read settings from a json file -->
+      <!--
+      <plugin>
+        <groupId>com.github.iarellano</groupId>
+        <artifactId>iad-json-properties-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>parse-json-files</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>load-json-properties</goal>
+            </goals>
+            <configuration>
+              <skip>false</skip>
+              <files>
+                <file>
+                  <prefix>module.</prefix>
+                  <failIfFileNotFound>true</failIfFileNotFound>
+                  <filePath>module.json</filePath>
+                </file>
+              </files>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      -->
+      <!-- Read settings from a properties file -->
+      <!--
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>read-project-properties</goal>
+            </goals>
+            <configuration>
+              <files>
+                <file>this.properties</file>
+              </files>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      -->
+    
+      <!-- Downloading from url to file -->
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-dataset</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <url>${input.url}</url>
+          <unpack>false</unpack>
+          <outputDirectory>${project.build.directory}</outputDirectory>
+          <outputFileName>${output.filename}</outputFileName>
+          <skipCache>true</skipCache>
+        </configuration>
+      </plugin>
+
+      <!-- Deployment of file -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-artifacts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${project.build.directory}/${output.filename}</file>
+		  <type>${output.filetype}</type>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
