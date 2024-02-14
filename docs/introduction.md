@@ -1,3 +1,7 @@
+---
+nav_order: 20
+---
+
 # A Brief Overview to Maven
 
 Maven is a build tool centered around the idea that different aspects of a project's build process can be captured as *life cycles* which are sequences of *phases*.

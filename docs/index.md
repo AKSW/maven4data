@@ -1,3 +1,7 @@
+---
+nav_order: 10
+---
+
 ## Maven-based Data Management
 
 This repository contains documentation about how the Maven ecosystem can adapted for data generation and publishing.
