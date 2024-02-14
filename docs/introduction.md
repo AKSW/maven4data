@@ -20,4 +20,5 @@ Within a pom.xml you can use any number of Maven plugins to execute code to alte
 
 <img src="images/maven-lifecycles.png" width="900"/>
 
-Image source: https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22
+<sub>Image source: https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22</sub>
+
