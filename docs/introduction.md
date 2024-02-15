@@ -4,9 +4,24 @@ layout: default
 nav_order: 20
 ---
 
-# A Brief Overview to Maven
+# An Introduction to Maven
 
-Maven is a build tool centered around the idea that different aspects of a project's build process can be captured as *life cycles* which are sequences of *phases*.
+Maven is a build tool centered around the ideas that:
+
+* All aspects of a *project* can be abstracted into the *project object model* (POM). The files containing project information are thus called `pom.xml`.
+* Different aspects of a project's *build process* can be captured as *life cycles* which are sequences of *phases*.
+
+Given a project with `pom.xml` file, most Maven users will only use a very limited set of phases, the typical ones most likely being the following:
+
+* First clean a project, then build everything and copy the build outcome into the local maven repository:
+```bash
+mvn clean install
+```
+
+* Deploy the build outcome to a target configured in the `pom.xml`.
+```
+mvn deploy
+```
 
 The image below is taken from [this excellent introductory post](https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22) and captures the essence nicely: It shows the three life cycles *default* , *clean* and *site*, and the corresponding sequence of phases, whereas the dark blue ones are the most relevant ones.
 
@@ -18,7 +33,10 @@ The `pom.xml` file captures a model of your project. The point that is crucial t
 
 Within a pom.xml you can use any number of Maven plugins to execute code to alter virtually any aspect of your project. Plugins are can do data and code generation, packaging, deployment or alter the `pom.xml` itself.
 
-
+For example, the Maven projects with the `spring-boot` plugin may allow for launching an application with:
+```bash
+mvn spring-boot:run
+```
 
 <img src="images/maven-lifecycles.png" width="900"/>
 
