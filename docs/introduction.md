@@ -48,5 +48,5 @@ The set of operations a plugin supports is called *goals*.
 Invoking maven with the name of a phase runs all plugins' goals that are *bound* to it.
 The declaration of which plugin's goal to execute in which phase is part of the `pom.xml` file.
 
-👉 This means, that for any missing feature in a build life cycle one should be considered whether it could be supplied by a plugin. Such an approach might be more sustainable than custom scripts.
+👉 This means, that for any missing feature in a build life cycle one should consider whether its worth writing a plugin for it (if one doesn't already exist). Such an approach might be more sustainable than custom scripts.
 
