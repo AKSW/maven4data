@@ -1,7 +1,7 @@
 ---
 title: Introduction to Maven
 layout: default
-nav_order: 23
+nav_order: 20
 ---
 
 # A Brief Overview to Maven
