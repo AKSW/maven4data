@@ -39,7 +39,7 @@ Within a pom.xml you can use any number of Maven plugins to execute code to alte
 
 <sub>Image source: https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22</sub>
 
-## Plugins and Goal
+## Plugins and Goals
 
 A phase does not do anything by itself. Plugins are the components that provide the logic for doing actual work.
 Technically, a plugin is a JAR file with meta-information for Maven.
@@ -47,4 +47,6 @@ The set of operations a plugin supports is called *goals*.
 
 Invoking maven with the name of a phase runs all plugins' goals that are *bound* to it.
 The declaration of which plugin's goal to execute in which phase is part of the `pom.xml` file.
+
+👉 This means, that for any missing feature in a build life cycle one should be considered whether it could be supplied by a plugin. Such an approach might be more sustainable than custom scripts.
 
