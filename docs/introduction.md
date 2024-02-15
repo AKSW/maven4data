@@ -23,6 +23,8 @@ mvn clean install
 mvn deploy
 ```
 
+## Overview of Phases
+
 The image below is taken from [this excellent introductory post](https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22) and captures the essence nicely: It shows the three life cycles *default* , *clean* and *site*, and the corresponding sequence of phases, whereas the dark blue ones are the most relevant ones.
 
 Note the phase *generate-resources* which can be used to generate data and *process-resources* which is intended to make it ready for packaging.
@@ -33,12 +35,16 @@ The `pom.xml` file captures a model of your project. The point that is crucial t
 
 Within a pom.xml you can use any number of Maven plugins to execute code to alter virtually any aspect of your project. Plugins are can do data and code generation, packaging, deployment or alter the `pom.xml` itself.
 
-For example, the Maven projects with the `spring-boot` plugin may allow for launching an application with:
-```bash
-mvn spring-boot:run
-```
-
 <img src="images/maven-lifecycles.png" width="900"/>
 
 <sub>Image source: https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22</sub>
+
+## Plugins and Goal
+
+A phase does not do anything by itself. Plugins are the components that provide the logic for doing actual work.
+Technically, a plugin is a JAR file with meta-information for Maven.
+The set of operations a plugin supports is called *goals*.
+
+Invoking maven with the name of a phase runs all plugins' goals that are *bound* to it.
+The declaration of which plugin's goal to execute in which phase is part of the `pom.xml` file.
 
