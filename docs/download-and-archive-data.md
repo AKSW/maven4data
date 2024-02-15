@@ -34,15 +34,11 @@ This chapter presents a `pom.xml` setup for how to download a single URL and arc
     <relativePath></relativePath>
   </parent>
 
-  <groupId>org.coypu.data.climatetrace</groupId>
-  <artifactId>climatetrace-agriculture</artifactId>
-  <version>0.2.0</version>
-  <packaging>pom</packaging>
-  <name>Climate TRACE - Agriculture</name>
-  <description>Climate TRACE archive for the sector "Agriculture".</description>
+  <name>Climate TRACE - Fluorinated Gases</name>
+  <description>Climate TRACE archive for the sector "Fluorinated Gases".</description>
   <url>https://climatetrace.org</url>
 
-  <licenses>  
+  <licenses>    
     <license>
       <name>Creative Commons Attribution 4.0</name>
       <url>https://creativecommons.org/licenses/by/4.0/</url>
@@ -51,8 +47,8 @@ This chapter presents a `pom.xml` setup for how to download a single URL and arc
 
   <properties>
     <!-- Machine readable original download link (may eventually break) -->
-    <input.url>https://downloads.climatetrace.org/v02/sector_packages/agriculture.zip</input.url>
-    <output.filename>agriculture.zip</output.filename>
+    <input.url>https://downloads.climatetrace.org/v02/sector_packages/fluorinated_gases.zip</input.url>
+    <output.filename>fluorinated_gases.zip</output.filename>
     <output.filetype>zip</output.filetype>
   </properties>
 
