@@ -14,4 +14,3 @@ Following the guidelines not only makes it possible to publish data under the [F
 The idea is simple: Maven provides a framework to version, build and deploy (publish) artifacts. Although artifacts are typically JAR files, it is possible to also publish data artifacts.
 
 
-
