@@ -25,16 +25,17 @@ One of the main reasons for the choice of maven is that its [naming conventions]
 
 ### Design Philosophy
 
-* 🌐 :globe_with_meridians: Language Agnostic: The data generator / transformer is in Python rather than Java? No problem.
-* 🔄 :arrows_counterclockwise: Reproducible Builds: Run `mvn install` repeatedly to repeatedly carry out the data build.
-* 💠 :diamond_shape_with_a_dot_inside: Semantic Web Interoperability: Represent [Maven Coordinates](artifact-naming.md) as URNs for use in RDF documents.
+* 🌐 Programming Language Agnostic: The data generation code is in Python rather than Java? No problem.
+* 🔄 Reproducible Builds: Run `mvn install` repeatedly to repeatedly carry out the data build.
+* 💠 Semantic Web Interoperability: Represent [Maven Coordinates](artifact-naming.md) as URNs for use in RDF documents.
+* 🌈 Data Format Agnostic: Although this guide has a Semantic Web / RDF bias, many concepts can be applied to any data format, such as CSV, XML, JSON, text, PDF or ZIP archives.
 
 ### Maven-based Data Management
 
-This repository contains documentation about how to adapt the Maven ecosystem for data generation and publishing.
+This repository contains guidelines about how to adopt, and adapt and maybe sometimes bend the Maven ecosystem for data generation and publishing.
 
 These guidelines are not only aimed at making it possible to publish data under the [FAIR principles](https://www.go-fair.org/fair-principles/)
 (in brief: findability, accessibility, interoperability, and reusability) but also to have **REPRODUCIBLE** builds, which have become conventional in modern software development.
 
-The idea is simple: Maven provides a framework to version, build and deploy (publish) artifacts. Although artifacts are typically JAR files, it is possible to also publish data artifacts.
+The idea is simple: Maven provides a framework to version, build and deploy artifacts. Although artifacts are typically JAR files, it is possible to also publish data artifacts.
 
