@@ -1,6 +1,7 @@
 ---
 title: Artifact Naming
 layout: default
+parent: Concepts
 nav_order: 20
 ---
 
@@ -8,7 +9,7 @@ nav_order: 20
 
 Artifacts in Maven are located along a 5 dimensional coordinate system.
 
-The three most fields are:
+The three most fundamental fields are:
 
 * `groupId`
 * `artifactId`
@@ -28,7 +29,12 @@ The remaining two fields are:
 
 ### Syntax
 
-Maven coordinates are usually represented with the syntax `groupId:artifactId:version[:type[:classifier]]`.
+Maven coordinates are usually represented with the syntax:
+
+```
+groupId:artifactId:version[:type[:classifier]]
+```
+
 The `[]` indicate optional fields, so type and classifier may be omitted, but if a classifier is needed, then a type must be given as well.
 
 Obviously colons (`:`) must not be used within values for any of the fields.
