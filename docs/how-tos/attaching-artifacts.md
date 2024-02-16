@@ -1,7 +1,8 @@
 ---
 title: Attaching Artifacts
 layout: default
-nav_order: 30
+parent: How-Tos
+nav_order: 20
 ---
 
 ## Attaching Artifacts
@@ -17,21 +18,10 @@ Installing or deploying the output will also install or deploy the attached arti
 * Keeps dataset files accessible as separate files - i.e. without bundling them up, for example, as a JAR file.
 * Deployment of the maven build output to a Build Artifact Repository Manager such as [Archiva](https://archiva.apache.org/) makes those artifacts easily accessible via HTTP(s).
 
-## Referencing attached Artifacts
-
-Attached artifacts can be referenced using the `pom.xml`'s [GAV](maven-concepts.md) plus the attached type and classifier.
-For example, the `pom.xml` below will install itself as `org.aksw.maven4data.examples:attach-example:1.0.0-SNAPSHOT:xml:example`:
-
-```bash
-mvn dependency:copy -D'artifact=org.aksw.maven4data.examples:attach-example:1.0.0-SNAPSHOT:xml:myclassifier' \
-  -Dmdep.stripVersion=true -D'outputDirectory=.'
-```
-This will create the file `attach-example-myclassifier.xml` in the local directory. The filename follows the pattern `[artifactId]-[classifier].[type]`.
-
 
 ## Example
 
-* The following example is self contained: Save the following snippet as `pom.xml` and run `mvn install`.
+* The following example is self contained: Save the following snippet as `pom.xml` and run `mvn package`.
 
 
 ```xml
@@ -47,10 +37,10 @@ This will create the file `attach-example-myclassifier.xml` in the local directo
   <name>Attach Artifact Example</name>
 
   <properties>
-    <filepath>pom.xml</filepath>    
+    <filepath>pom.xml</filepath>
     <filetype>xml</filetype>
     <classifier>myclassifier</classifier>
-    
+
     <build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
   </properties>
 
@@ -72,8 +62,8 @@ This will create the file `attach-example-myclassifier.xml` in the local directo
               <artifacts>
                 <artifact>
                   <file>${filepath}</file>
-		  <type>${filetype}</type>
-		  <classifier>${classifier}</classifier>
+                  <type>${filetype}</type>
+                  <classifier>${classifier}</classifier>
                 </artifact>
               </artifacts>
             </configuration>

@@ -1,14 +1,15 @@
 ---
-title: Archiving Code and Data
+title: Archive a Directory as a JAR
 layout: default
-nav_order: 35
+parent: How-Tos
+nav_order: 10
 ---
 
-# Archiving Resources 
+# Archive a Directory as a JAR
 
 ## Synopsis
 
-This chapter shows how any folder can be quickly archived as a versioned maven artifact.
+This chapter shows how any folder can be quickly archived as a versioned maven artifact (of type JAR).
 
 ## Purpose
 
@@ -34,7 +35,7 @@ Adjust the `folder` property to a meaningful folder of your project such as `src
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.aksw.maven4data.examples</groupId>
-  <artifactId>archive-folder</artifactId>
+  <artifactId>my-archived-directory</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <!-- JAR files are ZIP files, so we are actually just creating a ZIP file here -->
@@ -42,7 +43,7 @@ Adjust the `folder` property to a meaningful folder of your project such as `src
 
   <properties>
     <!-- Adjust the path to your needs -->
-    <folder>.</folder>
+    <directory-to-archive>.</directory-to-archive>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -51,7 +52,7 @@ Adjust the `folder` property to a meaningful folder of your project such as `src
   <build>
     <resources>
       <resource>
-        <directory>${folder}</directory>
+        <directory>${directory-to-archive}</directory>
       </resource>
     </resources>
   </build>
