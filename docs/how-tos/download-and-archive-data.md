@@ -1,6 +1,7 @@
 ---
 title: Archive a URL Download
 layout: default
+parent: How-Tos
 nav_order: 30
 ---
 

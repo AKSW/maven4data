@@ -1,6 +1,7 @@
 ---
 title: Build Anything with Docker
 layout: default
+parent: How-Tos
 nav_order: 50
 ---
 
