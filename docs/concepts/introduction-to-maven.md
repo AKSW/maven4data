@@ -1,7 +1,8 @@
 ---
 title: Introduction to Maven
 layout: default
-nav_order: 20
+parent: Concepts
+nav_order: 10
 ---
 
 # An Introduction to Maven

@@ -1,7 +1,7 @@
 ---
 title: Artifact Naming
 layout: default
-nav_order: 30
+nav_order: 20
 ---
 
 ## Artifact Naming

@@ -1,8 +1,7 @@
 ---
 title: Version Design
 layout: default
-parent: Concepts
-nav_order: 30
+nav_order: 18
 ---
 
 ## Version Design Considerations
