@@ -1,7 +1,7 @@
 ---
 title: Deploy to WebDAV
 layout: default
-parent: Deploment
+parent: Deployment
 nav_order: 20
 ---
 
