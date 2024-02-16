@@ -18,26 +18,26 @@ It is an extension to HTTP and is supported by many Web servers. Examples includ
 
 ## Caveats
 
-* ⚠️ Maven's WebDAV provider (`wagon-webdav-jackrabbit`) is deprecated and subject to removal in Maven 4. It is unclear whether and when there will be a replacement.
+> ⚠️ Maven's WebDAV provider (`wagon-webdav-jackrabbit`) is deprecated and subject to removal in Maven 4. It is unclear whether and when there will be a replacement.
 The example on this page was tested with Maven 3.
 
-* > ⚠️ Just like there is `http://` and its secure version `https://` the same difference exists for WebDAV as it builds upon HTTP(s).
+> ⚠️ Just like there is `http://` and its secure version `https://` the same difference exists for WebDAV as it builds upon HTTP(s).
 Using `dav://` in cases where secure webdav `davs://` is needed will result in errors.
 Typically it will be `permission denied` but it may also be `moved permanently` if the server tries to redirect.
 
 ## Approach
 
-* The following `mvn` invocation requires the `pom.xml` and adaptions to the `settings.xml` below.
-It will deploy a simple archive to the specified server.
+The following `mvn` invocation requires appropriately adapted versions of the `pom.xml` and `settings.xml` files as described below.
+It will deploy a simple archive to the specified server using:
+
 ```bash
-mvn
-  -D"webdav.url=davs://SERVER/nextcloud/remote.php/dav/files/USER" \
-  -D"webdav.id.internal=my.webdav.internal" \
-  -D"webdav.id.snapshots=my.webdav.snapshots" \
-  deploy
+mvn -P webdav deploy
 ```
 
-* Supply user name and password via `~/m2.settings.xml`:
+> ℹ️ It is generally good practice to put distribution configurations, such as that for the webdav deployment - into profiles.
+This allows one to easiliy deploy to a specific destination.
+
+Supply user name and password with appropriate `<server>` sections in the `~/m2/settings.xml`:
 ```xml
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -58,7 +58,8 @@ mvn
 </settings>
 ```
 
-* `pom.xml`
+The `pom.xml`:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -70,43 +71,52 @@ mvn
   <version>1.0.0-SNAPSHOT</version>
   
   <properties>
-    <!-- Adjust the URL to your needs -->
-    <webdav.base>https://myserver/remote.php/dav/files/Me</webdav.base>
+    <!-- Adjust the following settings your needs -->
+    <webdav.url>davs://SERVER/nextcloud/remote.php/dav/files/USERNAME</webdav.url>
+    
+    <!-- The values for these properties must match with the server ids in settings.xml -->
+    <webdav.id.internal>my.webdav.internal</webdav.id.internal>
+    <webdav.id.snapshots>my.webdav.snapshots</webdav.id.snapshots>
     
     <!-- Adjust the path to your needs -->
     <directory-to-archive>.</directory-to-archive>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <wagon-webdav-jackrabbit.version>3.0.0</wagon-webdav-jackrabbit.version>
-  <properties>
-
-  <distributionManagement>
-    <repository>
-      <id>me.myself.internal</id>
-      <name>My WebDAV-based Internal Repository</name>
-      <url>${webdav.url}</url>
-      <uniqueVersion>false</uniqueVersion>
-    </repository>
-    <snapshotRepository>
-      <id>me.myself.snapshots</id>
-      <name>My WebDAV-based Snapshot Repository</name>
-      <url>${webdav.url}</url>
-      <uniqueVersion>false</uniqueVersion>
-    </snapshotRepository>
-  </distributionManagement>
+  </properties>
   
   <repositories>
     <repository>
-      <id>me.myself.internal</id>
+      <id>${webdav.id.internal}</id>
       <name>My WebDAV-based Internal Repository</name>
       <url>${webdav.url}</url>
     </repository>
     <repository>
-      <id>me.myself.snapshots</id>
+      <id>${webdav.id.snapshots}</id>
       <name>My WebDAV-based Snapshot Repository</name>
       <url>${webdav.url}</url>
     </repository>
   </repositories>
+
+  <profiles>
+    <profile>
+      <id>webdav</id>
+      <distributionManagement>
+        <repository>
+          <id>${webdav.id.internal}</id>
+          <name>My WebDAV-based Internal Repository</name>
+          <url>${webdav.url}</url>
+          <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+          <id>${webdav.id.snapshots}</id>
+          <name>My WebDAV-based Snapshot Repository</name>
+          <url>${webdav.url}</url>
+          <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+      </distributionManagement>      
+    </profile>
+  </profiles>
 
   <build>
     <extensions>
