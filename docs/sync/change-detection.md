@@ -1,6 +1,7 @@
 ---
 title: Maven Repository Events
 layout: home
+parent: Maven-RDF Sync
 nav_order: 10
 ---
 

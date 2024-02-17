@@ -1,7 +1,7 @@
 ---
 title: Processing RDF
 layout: default
-nav_order: 100
+nav_order: 50
 ---
 
 ## Processing RDF with Maven

@@ -1,7 +1,8 @@
 ---
 title: Maven-RDF Sync
 layout: default
-nav_order: 200
+nav_order: 60
+has_children: true
 ---
 
 TODO Refactor mvn-rdf-sync into pages for: artifact change events, metadata generation and triple store sync.
