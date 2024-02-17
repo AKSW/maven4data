@@ -1,22 +1,27 @@
 ---
-title: Synchronizing Metadata
+title: Maven-RDF Sync
 layout: default
 nav_order: 200
 ---
 
-## Autogenerating RDF metadata for a Maven Repository.
+TODO Refactor mvn-rdf-sync into pages for: artifact change events, metadata generation and triple store sync.
 
-### Summary
+# Synchronizing a Triple Store with Maven Repository Data
+
+## Synopsis
 
 * This chapter presents a lightweight trigger-based approach to realize "build actions" (or "bots") over local maven repositories. A local maven repository is simply a certain directory structure.
   These bots can be used to automatically create new maven projects for producing RDF metadata.
 
-### Purpose
+## Purpose
 
 * Metadata artifacts are just plain maven artifacts whose content describes another artifact.
 * A large part of RDF metadata generation is agnostic of the content of a dataset and can be fully automated. In those cases, a user should not need to manually set up metadata projects.
 
-### Abstract Approach
+## Abstract Approach
+
+The `mvn-rdf-sync` approach comprises two separate processes:
+
 
 1. A *file system watch* on a (local) maven repository notifies raises events whenever the repository content changes.
 2. The event is transmitted to an appropriate receiver.

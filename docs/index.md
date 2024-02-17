@@ -8,7 +8,7 @@ nav_order: 10
 
 ## Synopsis
 
-This documentation is a guide for how to design Maven projects that can **publish data** with an invocation of:
+This documentation is a guide for how to design Maven projects that can **generate** and **publish** data with an mere invocation of:
 
 ```bash
 mvn deploy
@@ -19,7 +19,7 @@ This guide presents concepts for one-shot data publishing as well as for automat
 ## Why not ...
 
 * **use a Workflow Engine?**
-There are just too many workflow engines out there, and tying builds to one of them significantly limits portability.
+There exist many workflow engines, and tying builds to one of them significantly limits portability.
 Conversely, every workflow engine is expected to be capable of running a shell script and thus invoke a Maven build.
 
 * **use a different build system rather than Maven?**
