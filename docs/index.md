@@ -48,3 +48,4 @@ Perhaps this could be accomplished with custom life cycles?
 * When referencing data with the `build-helper` maven-plugin, the files are copied from the local maven repository to the maven project's workspace.
 The copying limits scalability to large datasets - ideally there was an option to create symlinks. It would be possible to fork the plugin but it would be better if this option was added via a PR.
 
+
