@@ -65,6 +65,20 @@ build:
     - directory: ${directory-to-archive}
 ```
 
+## Validation
+
+* As usual, you can validate a pom file using:
+
+```
+mvn validate
+```
+
+* For debugging it is often helpful to convert the YAML to JSON first. The tool `yq` can be used for this purpose:
+
+```bash
+yq -o json -p yaml pom.yml
+```
+
 ## Ployglot Quick Links
 
 * Latest versions: [https://search.maven.org/search?q=io.takari.polyglot](https://search.maven.org/search?q=io.takari.polyglot)
