@@ -67,8 +67,8 @@ build:
 
 ## Ployglot Quick Links
 
-* Latest versions: https://search.maven.org/search?q=io.takari.polyglot
-* Supported languages: https://github.com/takari/polyglot-maven#available-languages
-* Examples: https://github.com/takari/polyglot-maven-examples
+* Latest versions: [https://search.maven.org/search?q=io.takari.polyglot](https://search.maven.org/search?q=io.takari.polyglot)
+* Supported languages: [https://github.com/takari/polyglot-maven#available-languages](https://github.com/takari/polyglot-maven#available-languages)
+* Examples: [https://github.com/takari/polyglot-maven-examples](https://github.com/takari/polyglot-maven-examples)
 
 
