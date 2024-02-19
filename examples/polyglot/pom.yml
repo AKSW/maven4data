@@ -1,0 +1,15 @@
+modelVersion: 4.0.0
+groupId: org.aksw.maven4data.examples
+artifactId: my-archived-directory-polyglot
+version: 0.0.1-SNAPSHOT
+name: 'Package a directory in YAML'
+
+properties:
+  sisuInjectVersion: 0.0.0.M2a
+  directory-to-archive: .
+  project.build.sourceEncoding: UTF-8
+  
+build:
+  resources:
+    - directory: ${directory-to-archive}
+
