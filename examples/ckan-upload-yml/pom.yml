@@ -1,0 +1,76 @@
+modelVersion: 4.0.0
+groupId: org.aksw.example.data.climatetrace
+artifactId: climatetrace-fluorinated-gases
+version: 0.2.0
+name: Climate TRACE - Fluorinated Gases
+description: Climate TRACE archive for the sector "Fluorinated Gases".
+url: https://climatetrace.org
+
+licenses:
+  - name: Creative Commons Attribution 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+
+developers:
+  - name: Claus Stadler
+    url: http://aksw.org/ClausStadler
+    organization: AKSW
+    organizationUrl: http://aksw.org
+
+properties:
+  input.url: https://downloads.climatetrace.org/v02/sector_packages/fluorinated_gases.zip
+  output.filename: fluorinated_gases.zip
+  output.filetype: zip
+  output.path: ${project.build.directory}/${output.filename}
+  project.build.sourceEncoding: UTF-8
+  
+build:
+  plugins:
+
+    # Downloading from url to file
+    - groupId: com.googlecode.maven-download-plugin
+      artifactId: download-maven-plugin
+      executions:
+        - id: download-dataset
+          phase: process-resources
+          goals:
+            - wget
+          configuration:
+            url: ${input.url}
+            unpack: false
+            outputDirectory: ${project.build.directory}
+            outputFileName: ${output.filename}
+            skipCache: true
+
+    - groupId: org.aksw.maven.plugins
+      artifactId: ckan-maven-plugin
+      version: 0.0.1-SNAPSHOT
+      executions:
+        - id: ckan-upload
+          phase: deploy
+          goals:
+            - upload
+          configuration:
+            ckanUrl: https://dm.coypu.org/
+            serverId: dm.coypu.org
+            datasetId: Climate TRACE Test 1
+            resourceId: ${project.artifactId}
+            fileName: ${output.path}
+            organizationId: coypu
+            author: https://climatetrace.org/
+
+    # Deployment of file
+    - groupId: org.codehaus.mojo
+      artifactId: build-helper-maven-plugin
+      executions:
+        - id: attach-artifacts
+          phase: package
+          goals:
+            - attach-artifact
+          configuration:
+            artifacts:
+              - file: ${project.build.directory}/${output.filename}
+                type: ${output.filetype}
+
+
+
+
