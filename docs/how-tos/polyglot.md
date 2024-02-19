@@ -33,7 +33,7 @@ XML-based pipelines.
 In order to use Polyglot, you need to tell maven to load the polyglot extension prior to starting the actual build.
 
 In your project, create (or update) the file `.mvn/extensions.xml` with the following content:
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <extensions>
     <extension>
