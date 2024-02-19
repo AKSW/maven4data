@@ -19,7 +19,7 @@ nav_order: 30
 
 ## Approach
 
-Use can try our [ckan-maven-plugin](https://github.com/Scaseco/ckan-maven-plugin).
+Try our [ckan-maven-plugin](https://github.com/Scaseco/ckan-maven-plugin).
 
 ## Notes
 
