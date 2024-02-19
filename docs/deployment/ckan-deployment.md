@@ -11,7 +11,7 @@ nav_order: 30
 
 > The Comprehensive Knowledge Archive Network (CKAN) is an open-source open data portal for the storage and distribution of open data.
 
-<sub>Quted from [Wikipedia](https://en.wikipedia.org/wiki/CKAN)</sub>
+<sub>Quoted from [Wikipedia](https://en.wikipedia.org/wiki/CKAN)</sub>
 
 ## Purpose
 
