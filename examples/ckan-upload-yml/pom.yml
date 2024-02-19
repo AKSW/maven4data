@@ -21,14 +21,19 @@ properties:
   output.filename: fluorinated_gases.zip
   output.filetype: zip
   output.path: ${project.build.directory}/${output.filename}
+  download-maven-plugin.version: 1.7.1
+  ckan-maven-plugin.version: 0.0.1-SNAPSHOT
+  build-helper-maven-plugin.version: 3.5.0
+  maven-deploy-plugin.version: 3.1.1
   project.build.sourceEncoding: UTF-8
   
 build:
   plugins:
 
-    # Downloading from url to file
+    # Downloading from URL to file
     - groupId: com.googlecode.maven-download-plugin
       artifactId: download-maven-plugin
+      version: ${download-maven-plugin.version}
       executions:
         - id: download-dataset
           phase: process-resources
@@ -41,9 +46,10 @@ build:
             outputFileName: ${output.filename}
             skipCache: true
 
+    # CKAN Upload
     - groupId: org.aksw.maven.plugins
       artifactId: ckan-maven-plugin
-      version: 0.0.1-SNAPSHOT
+      version: ${ckan-maven-plugin.version}
       executions:
         - id: ckan-upload
           phase: deploy
@@ -58,9 +64,10 @@ build:
             organizationId: coypu
             author: https://climatetrace.org/
 
-    # Deployment of file
+    # Attachment of the dataset file to the build
     - groupId: org.codehaus.mojo
       artifactId: build-helper-maven-plugin
+      version: ${build-helper-maven-plugin.version}
       executions:
         - id: attach-artifacts
           phase: package
@@ -70,6 +77,14 @@ build:
             artifacts:
               - file: ${project.build.directory}/${output.filename}
                 type: ${output.filetype}
+    # Skip standard maven deploy
+    - groupId: org.apache.maven.plugins
+      artifactId: maven-deploy-plugin
+      version: ${maven-deploy-plugin.version}
+      executions:
+        - id: default-deploy
+          configuration:
+            skip: true
 
 
 
