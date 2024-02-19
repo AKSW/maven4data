@@ -7,7 +7,7 @@ nav_order: 20
 
 ## Attaching Artifacts
 
-### Summary
+## Synopsis
 
 This document describes how to use the `build-helper-maven-plugin`'s [attach-artifact-mojo](https://www.mojohaus.org/build-helper-maven-plugin/attach-artifact-mojo.html)
 in order to attach arbitrary files to the output of a maven build.
