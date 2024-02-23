@@ -2,7 +2,7 @@ title: Maven 4 Data
 #remote_theme: pmarsceill/just-the-docs
 theme: just-the-docs
 url: https://scaseco.github.io
-
+    
 # plugins:
 #   - jekyll-default-layout
 
@@ -17,6 +17,11 @@ url: https://scaseco.github.io
 #  - sansa*
 #  - javadoc
 #  - scaladocs
+
+# Aux links for the upper right navigation
+aux_links:
+  "Scaseco":
+    - "https://scaseco.github.io/"
 
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
