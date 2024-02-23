@@ -1,10 +1,11 @@
 ---
-title: Processing RDF
 layout: default
-nav_order: 50
+title: Generating RDF with RML
+parent: Processing RDF
+nav_order: 20
 ---
 
-## Processing RML with Maven
+## Generating RDF with RML
 
 ### Summary
 
