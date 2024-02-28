@@ -32,7 +32,7 @@
       <type>nt.bz2</type>
     </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
       <!-- Unpack the source code of the data generator into a local temp directory -->
@@ -109,9 +109,9 @@
                     </runCmds>
                   </build>
                   <run>
-					<env>
-				      <SPARQL_UPDATE>false</SPARQL_UPDATE>
-                      <!-- <DEFAULT_GRAPH>http://dbpedia.org</DEFAULT_GRAPH>-->
+                    <env>
+                      <SPARQL_UPDATE>false</SPARQL_UPDATE>
+                      <!-- <DEFAULT_GRAPH>http://dbpedia.org</DEFAULT_GRAPH> -->
                       <VIRT_Parameters_NumberOfBuffers>2720000</VIRT_Parameters_NumberOfBuffers>
                       <VIRT_Parameters_MaxDirtyBuffers>2000000</VIRT_Parameters_MaxDirtyBuffers>
                       <VIRT_Parameters_MaxVectorSize>1000000000</VIRT_Parameters_MaxVectorSize>
@@ -119,16 +119,16 @@
                       <VIRT_SPARQL_MaxQueryCostEstimationTime>0</VIRT_SPARQL_MaxQueryCostEstimationTime>
                       <VIRT_SPARQL_MaxQueryExecutionTime>180</VIRT_SPARQL_MaxQueryExecutionTime>
                       <VIRT_SPARQL_MaxDataSourceSize>10737418240</VIRT_SPARQL_MaxDataSourceSize>
-					</env>
+                    </env>
                     <wait>
                       <time>${timeout}</time>
                       <exit>0</exit>
                     </wait>
                     <volumes>
-				      <bind>
-				        <volume>tmp-volume:/data</volume>
-			          </bind>
-		            </volumes>
+                      <bind>
+                        <volume>tmp-volume:/data</volume>
+                      </bind>
+                    </volumes>
                   </run>
                   <copy>
                     <entries>
@@ -211,7 +211,7 @@
                 <configuration>
                   <!-- build helper can only parse integers. A timestamp of minute granularity such as -->
                   <!-- yyyyMMddHHmm is literally too *long* (pun intended) -->
-                  <newVersion>${parsedVersion.majorVersion}.${versionTimestamp}-SNAPSHOT</newVersion>                  
+                  <newVersion>${parsedVersion.majorVersion}.${versionTimestamp}-SNAPSHOT</newVersion>
                   <!-- <newVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${versionTimestamp}-SNAPSHOT</newVersion> -->
                 </configuration>
               </execution>
