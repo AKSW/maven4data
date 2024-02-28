@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.aksw.maven4data.examples</groupId>
+  <artifactId>virtuoso-db-generator</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <parent>
+    <groupId>org.aksw.data.config</groupId>
+    <artifactId>aksw-data-deployment</artifactId>
+    <version>0.0.8</version>
+    <relativePath></relativePath>
+  </parent>
+
+  <packaging>pom</packaging>
+
+  <properties>
+    <!-- Timeout after which docker execution will be terminated (in millis) -->
+    <!-- 1800000 = 30 minutes -->
+    <timeout>1800000</timeout>
+
+    <!-- Show docker output during build -->
+    <docker.showLogs>true</docker.showLogs>
+    <docker.user>raven</docker.user>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.coypu.data.disasters</groupId>
+      <artifactId>disasters</artifactId>
+      <version>0.20240228.1245</version>
+      <type>nt.bz2</type>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <!-- Unpack the source code of the data generator into a local temp directory -->
+      <!-- which is not the usual target folder. The temp dir is a quirk because the -->
+      <!-- docker-maven-plugin excludes the default 'target' build folder from the built image -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>copy-resource-dependencies</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/toLoad</outputDirectory>
+              <includeTypes>nt,ttl,nt.bz2,ttl.bz2</includeTypes>
+              <stripVersion>true</stripVersion>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Declare that the output file of the data generator should become part of this artifact -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-artifacts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${project.build.directory}/virtuoso.db</file>
+                  <type>db</type>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>generate-data</id>
+      <activation>
+        <property>
+          <name>skipGenerateData</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <configuration>
+              <images>
+                <image>
+                  <name>service-${project.artifactId}</name>
+                  <alias>virtuoso-db-build</alias>
+                  <build>
+                    <from>tenforce/virtuoso</from>
+                    <runCmds>
+                      <run>sed -i -E 's|^exec.*||g' /virtuoso.sh</run>
+                    </runCmds>
+                  </build>
+                  <run>
+					<env>
+				      <SPARQL_UPDATE>false</SPARQL_UPDATE>
+                      <!-- <DEFAULT_GRAPH>http://dbpedia.org</DEFAULT_GRAPH>-->
+                      <VIRT_Parameters_NumberOfBuffers>2720000</VIRT_Parameters_NumberOfBuffers>
+                      <VIRT_Parameters_MaxDirtyBuffers>2000000</VIRT_Parameters_MaxDirtyBuffers>
+                      <VIRT_Parameters_MaxVectorSize>1000000000</VIRT_Parameters_MaxVectorSize>
+                      <VIRT_SPARQL_ResultSetMaxRows>50000</VIRT_SPARQL_ResultSetMaxRows>
+                      <VIRT_SPARQL_MaxQueryCostEstimationTime>0</VIRT_SPARQL_MaxQueryCostEstimationTime>
+                      <VIRT_SPARQL_MaxQueryExecutionTime>180</VIRT_SPARQL_MaxQueryExecutionTime>
+                      <VIRT_SPARQL_MaxDataSourceSize>10737418240</VIRT_SPARQL_MaxDataSourceSize>
+					</env>
+                    <wait>
+                      <time>${timeout}</time>
+                      <exit>0</exit>
+                    </wait>
+                    <volumes>
+				      <bind>
+				        <volume>tmp-volume:/data</volume>
+			          </bind>
+		            </volumes>
+                  </run>
+                  <copy>
+                    <entries>
+                      <entry>
+                        <containerPath>/data/virtuoso.db</containerPath>
+                        <hostDirectory>${project.build.directory}</hostDirectory>
+                      </entry>
+                    </entries>
+                  </copy>
+                </image>
+              </images>
+              <volumes>
+                <volume>
+                  <name>temp-volume</name>
+                  <driver>local</driver>
+                </volume>
+              </volumes>
+            </configuration>
+            <executions>
+              <execution>
+                <!-- <id>build-container</id> <phase>generate-resources</phase> <goals> <goal>build</goal> </goals> -->
+              </execution>
+              <execution>
+                <id>run-container</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>build</goal>
+                  <goal>volume-create</goal>
+                  <goal>start</goal>
+                  <goal>copy</goal>
+                  <goal>stop</goal>
+                  <goal>volume-remove</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Activating this profile sets the incremental version of this pom.xml to the current timestamp (minute granularity) -->
+    <profile>
+      <id>increment-version</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>version-timestamp-property</id>
+                <goals>
+                  <goal>timestamp-property</goal>
+                </goals>
+                <configuration>
+                  <!-- format the timestamp such that the components fit into integers -->
+                  <name>versionTimestamp</name>
+                  <pattern>yyyyMMdd.HHmm</pattern>
+                  <locale>en_US</locale>
+                  <timeZone>UTC</timeZone>
+                </configuration>
+              </execution>
+              <execution>
+                <id>parse-version</id>
+                <goals>
+                  <goal>parse-version</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>versions-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>validate</phase>
+                <goals>
+                  <goal>set</goal>
+                </goals>
+                <configuration>
+                  <!-- build helper can only parse integers. A timestamp of minute granularity such as -->
+                  <!-- yyyyMMddHHmm is literally too *long* (pun intended) -->
+                  <newVersion>${parsedVersion.majorVersion}.${versionTimestamp}-SNAPSHOT</newVersion>                  
+                  <!-- <newVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${versionTimestamp}-SNAPSHOT</newVersion> -->
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
