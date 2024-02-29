@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.aksw.maven4data.examples</groupId>
-  <artifactId>virtuoso-db-generator</artifactId>
+  <groupId>org.aksw.maven4data.examples.data.virtuoso</groupId>
+  <artifactId>disasters</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <parent>
@@ -21,7 +21,10 @@
 
     <!-- Show docker output during build -->
     <docker.showLogs>true</docker.showLogs>
-    <docker.user>raven</docker.user>
+    <!-- <docker.user>raven</docker.user> -->
+    
+    <data.port>8895</data.port>
+    <data.serve></data.serve>
   </properties>
 
   <dependencies>
@@ -35,9 +38,7 @@
 
   <build>
     <plugins>
-      <!-- Unpack the source code of the data generator into a local temp directory -->
-      <!-- which is not the usual target folder. The temp dir is a quirk because the -->
-      <!-- docker-maven-plugin excludes the default 'target' build folder from the built image -->
+      <!-- Copy all dependencies with an RDF type to the toLoad folder -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -52,11 +53,26 @@
             <configuration>
               <outputDirectory>${project.build.directory}/toLoad</outputDirectory>
               <includeTypes>nt,ttl,nt.bz2,ttl.bz2</includeTypes>
+              <!-- <stripVersion>true</stripVersion> -->
+            </configuration>
+          </execution>
+          <!--
+          <execution>
+            <id>unpack</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/toLoad</outputDirectory>
+              <includeTypes>nt.bz2,ttl.bz2</includeTypes>
               <stripVersion>true</stripVersion>
             </configuration>
           </execution>
+          -->
         </executions>
       </plugin>
+
 
       <!-- Declare that the output file of the data generator should become part of this artifact -->
       <plugin>
@@ -73,7 +89,7 @@
               <artifacts>
                 <artifact>
                   <file>${project.build.directory}/virtuoso.db</file>
-                  <type>db</type>
+                  <type>virtuoso.db</type>
                 </artifact>
               </artifacts>
             </configuration>
@@ -88,7 +104,7 @@
       <id>generate-data</id>
       <activation>
         <property>
-          <name>skipGenerateData</name>
+          <name>maven.resources.skip</name>
           <value>!true</value>
         </property>
       </activation>
@@ -105,11 +121,19 @@
                   <build>
                     <from>tenforce/virtuoso</from>
                     <runCmds>
-                      <run>sed -i -E 's|^exec.*||g' /virtuoso.sh</run>
+                      <run><![CDATA[
+echo "#!/bin/bash\nfind /data/toLoad -name '*.bz2' -exec bzip2 -d {} \;\n$(tail -n+2 /virtuoso.sh)" > /virtuoso.sh && \
+sed -i -E 's|^exec.*||g' /virtuoso.sh && \
+echo 'if [ ! -z "$SERVE" ]; then exec virtuoso-t +wait +foreground; fi' >> /virtuoso.sh
+]]></run>
                     </runCmds>
                   </build>
                   <run>
+                    <ports> 
+                      <port>${data.port}:8890</port>
+                    </ports>
                     <env>
+                      <SERVE>${data.serve}</SERVE>
                       <SPARQL_UPDATE>false</SPARQL_UPDATE>
                       <!-- <DEFAULT_GRAPH>http://dbpedia.org</DEFAULT_GRAPH> -->
                       <VIRT_Parameters_NumberOfBuffers>2720000</VIRT_Parameters_NumberOfBuffers>
@@ -127,6 +151,9 @@
                     <volumes>
                       <bind>
                         <volume>tmp-volume:/data</volume>
+                      </bind>
+                      <bind>
+                        <volume>${project.build.directory}/toLoad:/data/toLoad</volume>
                       </bind>
                     </volumes>
                   </run>
@@ -152,13 +179,27 @@
                 <!-- <id>build-container</id> <phase>generate-resources</phase> <goals> <goal>build</goal> </goals> -->
               </execution>
               <execution>
-                <id>run-container</id>
-                <phase>process-resources</phase>
+                <id>setup-container</id>
+                <phase>generate-resources</phase>
                 <goals>
                   <goal>build</goal>
                   <goal>volume-create</goal>
                   <goal>start</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>run-container</id>
+                <phase>process-resources</phase>
+                <goals>
                   <goal>copy</goal>
+                  <goal>stop</goal>
+                  <goal>volume-remove</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>clean-container</id>
+                <phase>clean</phase>
+                <goals>
                   <goal>stop</goal>
                   <goal>volume-remove</goal>
                 </goals>
@@ -168,6 +209,7 @@
         </plugins>
       </build>
     </profile>
+
 
     <!-- Activating this profile sets the incremental version of this pom.xml to the current timestamp (minute granularity) -->
     <profile>
