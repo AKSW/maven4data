@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.aksw.maven4data.examples</groupId>
+  <artifactId>virtuoso-serve</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <parent>
+    <groupId>org.aksw.data.config</groupId>
+    <artifactId>aksw-data-deployment</artifactId>
+    <version>0.0.8</version>
+    <relativePath></relativePath>
+  </parent>
+
+  <packaging>pom</packaging>
+
+  <!-- Usage: -->
+  <!-- Start the container: mvn process-resources -->
+  <!-- Stop the container: mvn docker:stop -->
+
+  <properties>
+    <!-- Timeout after which docker execution will be terminated (in millis) -->
+    <!-- 1800000 = 30 minutes -->
+    <timeout>1800000</timeout>
+
+    <!-- Show docker output during build -->
+    <docker.showLogs>true</docker.showLogs>
+    <docker.user>raven</docker.user>
+    
+    <data.port>8895</data.port>
+    <data.serve></data.serve>
+  </properties>
+
+
+  <!--
+  <dependencies>
+    <dependency>
+      <groupId>org.aksw.maven4data.examples.data.virtuoso</groupId>
+      <artifactId>disasters</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <type>virtuoso.db</type>
+    </dependency>
+  </dependencies>
+  -->
+
+  <build>
+    <plugins>
+      <!-- Copy all dependencies with an RDF type to the toLoad folder -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.aksw.maven4data.examples.data.virtuoso</groupId>
+                  <artifactId>disasters</artifactId>
+                  <version>0.0.1-SNAPSHOT</version>
+                  <type>virtuoso.db</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${project.build.directory}/data</outputDirectory>
+                  <destFileName>virtuoso.db</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <configuration>
+              <images>
+                <image>
+                  <name>tenforce/virtuoso</name>
+                  <alias>virtuoso-db-server</alias>
+                  <run>
+                    <ports> 
+                      <port>${data.port}:8890</port>
+                    </ports>
+                    <env>
+                      <SERVE>${data.serve}</SERVE>
+                      <SPARQL_UPDATE>false</SPARQL_UPDATE>
+                      <!-- <DEFAULT_GRAPH>http://dbpedia.org</DEFAULT_GRAPH> -->
+                      <VIRT_Parameters_NumberOfBuffers>2720000</VIRT_Parameters_NumberOfBuffers>
+                      <VIRT_Parameters_MaxDirtyBuffers>2000000</VIRT_Parameters_MaxDirtyBuffers>
+                      <VIRT_Parameters_MaxVectorSize>1000000000</VIRT_Parameters_MaxVectorSize>
+                      <VIRT_SPARQL_ResultSetMaxRows>50000</VIRT_SPARQL_ResultSetMaxRows>
+                      <VIRT_SPARQL_MaxQueryCostEstimationTime>0</VIRT_SPARQL_MaxQueryCostEstimationTime>
+                      <VIRT_SPARQL_MaxQueryExecutionTime>180</VIRT_SPARQL_MaxQueryExecutionTime>
+                      <VIRT_SPARQL_MaxDataSourceSize>10737418240</VIRT_SPARQL_MaxDataSourceSize>
+                    </env>
+                    <wait>
+                      <time>${timeout}</time>
+                      <exit>0</exit>
+                    </wait>
+                    <volumes>
+                      <bind>
+                        <volume>${project.build.directory}/data:/data</volume>
+                      </bind>
+                    </volumes>
+                  </run>
+                </image>
+              </images>
+            </configuration>
+            <executions>
+              <execution>
+                <id>serve</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>start</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>clean-container</id>
+                <phase>clean</phase>
+                <goals>
+                  <goal>stop</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+
+</project>
+
