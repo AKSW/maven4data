@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.aksw.maven4data.examples</groupId>
+  <groupId>org.aksw.maven4data.examples.virtuoso</groupId>
   <artifactId>virtuoso-serve</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
@@ -16,19 +16,23 @@
 
   <!-- Usage: -->
   <!-- Start the container: mvn process-resources -->
+  <!-- Endpoint URL is http://localhost:8895/sparql -->
+  <!-- Override port with "mvn -D data.port=8890 process-resources -->
   <!-- Stop the container: mvn docker:stop -->
+  <!-- "mvn clean" also stops the container but also removes all generated files -->
 
   <properties>
+    <!-- Port under which to expose the Virtuoso service wrapped in this POM file -->
+    <data.port>8895</data.port>
+
     <!-- Timeout after which docker execution will be terminated (in millis) -->
     <!-- 1800000 = 30 minutes -->
-    <timeout>1800000</timeout>
+    <!-- 3600000 = 60 minutes -->
+    <timeout>3600000</timeout>
 
     <!-- Show docker output during build -->
     <docker.showLogs>true</docker.showLogs>
-    <docker.user>raven</docker.user>
-    
-    <data.port>8895</data.port>
-    <data.serve></data.serve>
+    <docker.user>raven</docker.user>    
   </properties>
 
 
@@ -43,36 +47,46 @@
   </dependencies>
   -->
 
-  <build>
-    <plugins>
+  <profiles>
+    <profile>
+      <id>serve</id>
+      <activation>
+        <property>
+          <name>serve.skip</name>
+          <value>!true</value>
+        </property>
+      </activation>
+
+      <build>
+        <plugins>
       <!-- Copy all dependencies with an RDF type to the toLoad folder -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.6.1</version>
-        <executions>
-          <execution>
-            <id>copy</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>copy</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.aksw.maven4data.examples.data.virtuoso</groupId>
-                  <artifactId>disasters</artifactId>
-                  <version>0.0.1-SNAPSHOT</version>
-                  <type>virtuoso.db</type>
-                  <overWrite>true</overWrite>
-                  <outputDirectory>${project.build.directory}/data</outputDirectory>
-                  <destFileName>virtuoso.db</destFileName>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.6.1</version>
+            <executions>
+              <execution>
+                <id>copy</id>
+                <phase>generate-resources</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>org.aksw.maven4data.examples.data.virtuoso</groupId>
+                      <artifactId>disasters</artifactId>
+                      <version>0.0.1-SNAPSHOT</version>
+                      <type>virtuoso.db</type>
+                      <overWrite>true</overWrite>
+                      <outputDirectory>${project.build.directory}/data</outputDirectory>
+                      <destFileName>virtuoso.db</destFileName>
+                    </artifactItem>
+                  </artifactItems>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
 
           <plugin>
             <groupId>io.fabric8</groupId>
@@ -87,7 +101,6 @@
                       <port>${data.port}:8890</port>
                     </ports>
                     <env>
-                      <SERVE>${data.serve}</SERVE>
                       <SPARQL_UPDATE>false</SPARQL_UPDATE>
                       <!-- <DEFAULT_GRAPH>http://dbpedia.org</DEFAULT_GRAPH> -->
                       <VIRT_Parameters_NumberOfBuffers>2720000</VIRT_Parameters_NumberOfBuffers>
@@ -130,6 +143,7 @@
           </plugin>
         </plugins>
       </build>
-
+    </profile>
+  </profiles>
 </project>
 

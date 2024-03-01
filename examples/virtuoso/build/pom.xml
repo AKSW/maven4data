@@ -23,16 +23,19 @@
     <docker.showLogs>true</docker.showLogs>
     <!-- <docker.user>raven</docker.user> -->
     
-    <data.port>8895</data.port>
+    <data.port>8894</data.port>
+
+    <!-- If data.serve is not empty then the virtuoso will not be terminated after loading -->
     <data.serve></data.serve>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>org.coypu.data.disasters</groupId>
+      <groupId>dcat.org.coypu.data.disasters</groupId>
       <artifactId>disasters</artifactId>
-      <version>0.20240228.1245</version>
-      <type>nt.bz2</type>
+      <version>0.20240227.2324-1</version>
+      <classifier>dcat</classifier>
+      <type>ttl.bz2</type>
     </dependency>
   </dependencies>
 
@@ -209,58 +212,6 @@ echo 'if [ ! -z "$SERVE" ]; then exec virtuoso-t +wait +foreground; fi' >> /virt
         </plugins>
       </build>
     </profile>
-
-
-    <!-- Activating this profile sets the incremental version of this pom.xml to the current timestamp (minute granularity) -->
-    <profile>
-      <id>increment-version</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>version-timestamp-property</id>
-                <goals>
-                  <goal>timestamp-property</goal>
-                </goals>
-                <configuration>
-                  <!-- format the timestamp such that the components fit into integers -->
-                  <name>versionTimestamp</name>
-                  <pattern>yyyyMMdd.HHmm</pattern>
-                  <locale>en_US</locale>
-                  <timeZone>UTC</timeZone>
-                </configuration>
-              </execution>
-              <execution>
-                <id>parse-version</id>
-                <goals>
-                  <goal>parse-version</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>versions-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>validate</phase>
-                <goals>
-                  <goal>set</goal>
-                </goals>
-                <configuration>
-                  <!-- build helper can only parse integers. A timestamp of minute granularity such as -->
-                  <!-- yyyyMMddHHmm is literally too *long* (pun intended) -->
-                  <newVersion>${parsedVersion.majorVersion}.${versionTimestamp}-SNAPSHOT</newVersion>
-                  <!-- <newVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${versionTimestamp}-SNAPSHOT</newVersion> -->
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
   </profiles>
 </project>
+
