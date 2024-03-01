@@ -1,8 +1,8 @@
 ---
 title: Messaging
-layout: home
+layout: default
 parent: Maven-RDF Sync
-nav_order: 20
+nav_order: 30
 ---
 
 # Messaging

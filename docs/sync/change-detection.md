@@ -1,8 +1,8 @@
 ---
 title: Maven Repository Events
-layout: home
+layout: default
 parent: Maven-RDF Sync
-nav_order: 10
+nav_order: 20
 ---
 
 
