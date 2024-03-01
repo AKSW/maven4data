@@ -36,7 +36,7 @@ The `pom.xml` file captures a model of your project. The point that is crucial t
 
 Within a pom.xml you can use any number of Maven plugins to execute code to alter virtually any aspect of your project. Plugins are can do data and code generation, packaging, deployment or alter the `pom.xml` itself.
 
-<img src="images/maven-lifecycles.png" width="900"/>
+<img src="../images/maven-lifecycles.png" width="900"/>
 
 <sub>Image source: https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22</sub>
 
