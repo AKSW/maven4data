@@ -28,6 +28,14 @@ For specific issues, it may be more likely to find solutions using XML rather th
 XML-based pipelines.
 * Deploying a polyglot pom file can be done by [attaching it as an artifact](attaching-artifacts.md).
 
+## Converting Maven Projects
+
+POM syntaxes can be converted with the `polyglot-translate-plugin`'s `translate` goal:
+
+```bash
+mvn io.takari.polyglot:polyglot-translate-plugin:translate -Dinput=pom.xml -Doutput=pom.yml
+```
+
 ## Enabling Polyglot
 
 In order to use Polyglot, you need to tell maven to load the polyglot extension prior to starting the actual build.
