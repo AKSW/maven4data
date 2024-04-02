@@ -6,6 +6,10 @@ nav_order: 10
 
 # Maven 4 Data
 
+## Online Demo
+
+[Click here for the Demo](online-demo.md)
+
 ## Synopsis
 
 This documentation is a guide for how to design Maven projects that can **generate** and **publish** data with an mere invocation of:
