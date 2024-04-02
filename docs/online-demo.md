@@ -1,3 +1,9 @@
+---
+layout: default
+title: Demo
+nav_order: 100
+---
+
 ## Online Demo
 
 These are Links to [YasGUI](https://yasgui.triply.cc/) visualizations for [our SPARQL endpoint](https://maven.aksw.org/sparql).
