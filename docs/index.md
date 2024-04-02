@@ -8,7 +8,7 @@ nav_order: 10
 
 ## Online Demo
 
-[Click here for the Demo](online-demo.md)
+[Click here for the Demo](online-demo)
 
 ## Synopsis
 
@@ -27,13 +27,13 @@ There exist many workflow engines, and tying builds to one of them significantly
 Conversely, every workflow engine is expected to be capable of running a shell script and thus invoke a Maven build.
 
 * **use a different build system rather than Maven?**
-One of the main reasons for the choice of maven is that its [naming conventions](artifact-naming.md) fit well with Semantic Web concepts.
+One of the main reasons for the choice of maven is that its [naming conventions](concepts/artifact-naming.md) fit well with Semantic Web concepts.
 
 ## Design Philosophy
 
 * 🌐 Programming Language Agnostic: The data generation code is in Python rather than Java? No problem.
 * 🔄 Reproducible Builds: Run `mvn install` repeatedly to repeatedly carry out the data build.
-* 💠 Semantic Web Interoperability: Represent [Maven Coordinates](artifact-naming.md) as URNs for use in RDF documents.
+* 💠 Semantic Web Interoperability: Represent [Maven Coordinates](concepts/artifact-naming.md) as URNs for use in RDF documents.
 * 🌈 Data Format Agnostic: Although this guide has a Semantic Web / RDF bias, many concepts can be applied to any data format, such as CSV, XML, JSON, text, PDF or ZIP archives.
 
 ## Maven-based Data Management
