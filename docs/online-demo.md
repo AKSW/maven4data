@@ -15,8 +15,8 @@ Note, that published data contains links to the `pom.xml` files in the archiva, 
 
 \* The POM does not have native support for such metadata, we intent to introduce the following Maven and RDF properties in the metadata:
 
-*`m4d:self-contained` to indicate that the POM is intended to support running it stand-alone in order to produce one or more output artifacts, and
-*`m4d:reproducible` when each run is supposed to produce the exact same output bit-by-bit.
+* `m4d:self-contained` to indicate that the POM is intended to support running it stand-alone in order to produce one or more output artifacts, and
+* `m4d:reproducible` when each run is supposed to produce the exact same output bit-by-bit.
 
 ## Links
 
