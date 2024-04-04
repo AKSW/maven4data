@@ -9,6 +9,10 @@ TODO Refactor mvn-rdf-sync into pages for: artifact change events, metadata gene
 
 # Synchronizing a Triple Store with Maven Repository Data
 
+## Source Code
+
+The source code for `mvn-rdf-sync` is located at: https://github.com/Scaseco/mvn-rdf-sync
+
 ## Synopsis
 
 * This chapter presents a lightweight trigger-based approach to realize "build actions" (or "bots") over local maven repositories. A local maven repository is simply a certain directory structure.
@@ -22,7 +26,6 @@ TODO Refactor mvn-rdf-sync into pages for: artifact change events, metadata gene
 ## Abstract Approach
 
 The `mvn-rdf-sync` approach comprises two separate processes:
-
 
 1. A *file system watch* on a (local) maven repository notifies raises events whenever the repository content changes.
 2. The event is transmitted to an appropriate receiver.
