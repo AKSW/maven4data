@@ -9,7 +9,7 @@ nav_order: 10
 
 ## Source Code
 
-The source code for `mvn-rdf-sync` is located at: https://github.com/Scaseco/mvn-rdf-sync
+The source code for `mvn-rdf-sync` is located at: [https://github.com/Scaseco/mvn-rdf-sync](https://github.com/Scaseco/mvn-rdf-sync).
 
 ## Synopsis
 

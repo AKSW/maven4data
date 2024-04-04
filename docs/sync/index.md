@@ -11,7 +11,7 @@ TODO Refactor mvn-rdf-sync into pages for: artifact change events, metadata gene
 
 ## Source Code
 
-The source code for `mvn-rdf-sync` is located at: https://github.com/Scaseco/mvn-rdf-sync
+The source code for `mvn-rdf-sync` is located at: [https://github.com/Scaseco/mvn-rdf-sync](https://github.com/Scaseco/mvn-rdf-sync).
 
 ## Synopsis
 
