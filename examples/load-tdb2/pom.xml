@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.aksw.data.config</groupId>
+    <artifactId>aksw-data-deployment</artifactId>
+    <version>0.0.8</version>
+    <relativePath></relativePath>
+  </parent>
+
+  <groupId>org.aksw.deleteme</groupId>
+  <artifactId>my-example-kg</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.coypu.data.disasters</groupId>
+      <artifactId>disasters</artifactId>
+      <version>0.20240312.1842</version>
+      <type>nt.bz2</type>
+    </dependency>
+    <dependency>
+      <groupId>org.aksw.moin</groupId>
+      <artifactId>moin</artifactId>
+      <version>1.20220502.0</version>
+      <type>ttl.bz2</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.aksw.maven.plugins</groupId>
+        <artifactId>tdb2-maven-plugin</artifactId>
+        <version>0.0.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>load</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
