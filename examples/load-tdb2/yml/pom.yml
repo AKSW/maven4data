@@ -5,8 +5,8 @@ artifactId: my-example-kg
 version: 1.0.0
 packaging: pom
 dependencies:
-- {groupId: org.coypu.data.disasters, artifactId: disasters,version: 0.20240312.1842, type: nt.bz2}
-- {groupId: org.aksw.moin, artifactId: moin,version: 1.20220502.0, type: ttl.bz2}
+- {groupId: org.coypu.data.disasters, artifactId: disasters, version: 0.20240312.1842, type: nt.bz2}
+- {groupId: org.aksw.moin, artifactId: moin, version: 1.20220502.0, type: ttl.bz2}
 build:
   plugins:
   - groupId: org.aksw.maven.plugins
